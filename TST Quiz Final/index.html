@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="style.css" />
+    <title>TST Quiz</title>
+</head>
+
+<body>
+	
+	<div id="game-window">
+		<h1 id="game-title">TST Quiz</h1>
+			
+		<div id="wrapper">
+			<div id="canvas-wrapper"><canvas id="canvas"></canvas></div>
+		</div>
+	</div>
+	
+	<pre>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			/* Mover ajax acá */ 
+			$.ajax({
+				url: "https://rawgit.com/Larpee/The-Khan-Quiz/master/game.js",
+				success: function (script) {
+					function sketchProc (processingInstance) {
+						with (processingInstance) {
+							size(400, 400);
+							frameRate(30);
+							eval(script);
+						}
+					};
+
+					var canvas = document.getElementById("canvas");
+					var processingInstance = new Processing(canvas, sketchProc);
+				},
+				dataType: "text"
+			});
+		})
+	</script>
+	</pre>
+</body>
+</html>
